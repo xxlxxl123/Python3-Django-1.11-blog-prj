@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block titleHead %}{{ instance.title }} | {{ block.super }}{% endblock %}
+{% block content %}
+    <div class="col-sm-15 col-sm-offset-2">
+        <h1>{{ title }}
+             <small>{{ instance.publish }}</small>    <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div></p>
+<hr/>
+        </h1>{% if instance.draft %}<span style="color: red;">草稿</span>{% endif %}
+{% if instance.user.get_full_name %}
+    <p>{{ instance.user.get_full_name }}</p>
+    {% endif %}
+        {{ instance.content |linebreaks }}
+
+        {% if instance.image %}
+            <img src="{{ instance.image.url }}" class="img-responsive"/>
+        {% endif %}
+    <hr/>
+    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+    <br/>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-591d4a489f2e4160"></script>
+ <div class="addthis_inline_share_toolbox"></div>
+    </div>
+{% endblock content %}
